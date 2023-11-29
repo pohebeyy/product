@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="GENERAL_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
+import java.util.ArrayList;
+import java.util.List;
+
+class Product {
+    private String name;
+    private double price;
+    
+
+    public Product(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    
+}
+
+class Store {
+    private List<Product> availableProducts;
+    private List<Product> soldProducts;
+
+    public Store() {
+        availableProducts = new ArrayList<>();
+        soldProducts = new ArrayList<>();
+    }
+
+    
+    public void addProduct(Product product) {
+        availableProducts.add(product);
+    }
+
+    
+    public void sellProduct(Product product) {
+        if (availableProducts.contains(product)) {
+            availableProducts.remove(product);
+            soldProducts.add(product);
+            System.out.println("Продан товар: " + product.getName());
+        } else {
+            System.out.println("Товар отсутствует в наличии");
+        }
+    }
+
+    
+    public void displayAvailableProducts() {
+        System.out.println("Товары в наличии:");
+        for (Product product : availableProducts) {
+            System.out.println(product.getName() + " - Цена: " + product.getPrice());
+        }
+    }
+
+    
+    public void displaySoldProducts() {
+        System.out.println("Проданные товары:");
+        for (Product product : soldProducts) {
+            System.out.println(product.getName() + " - Цена: " + product.getPrice());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Store store = new Store();
+
+        Product product1 = new Product("Кофта", 20.0);
+        Product product2 = new Product("Шорты", 50.0);
+
+        store.addProduct(product1);
+        store.addProduct(product2);
+
+        store.displayAvailableProducts();
+
+        store.sellProduct(product1);
+
+        store.displaySoldProducts();
+    }
+}
